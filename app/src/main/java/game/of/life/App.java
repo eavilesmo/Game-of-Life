@@ -3,12 +3,25 @@
  */
 package game.of.life;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        List<Integer> row = Arrays.asList(1, 1, 1, 1, 0, 1, 0, 0);
+
+        ArrayList<List<Integer>> grid = new ArrayList<>();
+        grid.add(row);
+        grid.add(row);
+        grid.add(row);
+        grid.add(row);
+
+        GameOfLife gameOfLife = new GameOfLife(grid);
+
+        ArrayList<List<Integer>> resultList = gameOfLife.nextGeneration();
+        for (List<Integer> newRow : resultList) {
+            System.out.println(newRow);
+        }
     }
 }
