@@ -1,15 +1,19 @@
 package game.of.life;
 
-import java.sql.Array;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameOfLife {
+    InputConverter inputConverter = new InputConverter();
+    private final ArrayList<ArrayList<Integer>> grid;
 
-    private final ArrayList<List<Integer>> grid;
-
-    public GameOfLife(ArrayList<List<Integer>> grid) {
-        this.grid = grid;
+    {
+        try {
+            grid = inputConverter.reader();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public ArrayList<List<Integer>> nextGeneration() {
@@ -168,4 +172,3 @@ public class GameOfLife {
         return resultList;
     }
 }
-
