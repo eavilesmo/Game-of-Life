@@ -3,24 +3,31 @@
  */
 package game.of.life;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        List<Integer> row = Arrays.asList(1, 1, 1, 1, 0, 1, 0, 0);
 
-        ArrayList<List<Integer>> grid = new ArrayList<>();
-        grid.add(row);
-        grid.add(row);
-        grid.add(row);
-        grid.add(row);
+        InputConverter inputConverter = new InputConverter();
 
-        GameOfLife gameOfLife = new GameOfLife(grid);
+        System.out.println("First Generation");
+        ArrayList<ArrayList<Integer>> firstGeneration;
+        try {
+            firstGeneration = inputConverter.reader();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        for (List<Integer> newRow : firstGeneration) {
+            System.out.println(newRow);
+        }
 
-        ArrayList<List<Integer>> resultList = gameOfLife.nextGeneration();
-        for (List<Integer> newRow : resultList) {
+        GameOfLife gameOfLife = new GameOfLife();
+
+        System.out.println("Next Generation");
+        ArrayList<List<Integer>> nextGeneration = gameOfLife.nextGeneration();
+        for (List<Integer> newRow : nextGeneration) {
             System.out.println(newRow);
         }
     }
